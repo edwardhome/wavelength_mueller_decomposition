@@ -6,9 +6,13 @@ import time
 from matplotlib import pyplot as plt
 from nuueomueller import Luchiman, Mueller
 
-filename = input('Please enter the mueller csvfile name (need to key in ".csv")= ')
+filename = input('Please enter the mueller csvfile name (Do not key in ".csv")= ')
+if filename == '':
+    filename = 'input'
+else:
+    pass
 try:
-    database = pd.read_csv(filename,index_col='wavelength')
+    database = pd.read_csv(filename+'.csv',index_col='wavelength')
 except FileNotFoundError:
     print('Not Found your file')
     print('Please check your file name')
@@ -108,19 +112,19 @@ with pd.ExcelWriter('output.xlsx') as writer:
 '''
 t = time.localtime()
 stamp = str()
-for i in range():
+for i in range(3):
     stamp += str(t[i])
 #儲存Csv
 try:
     print('Create a new folder...')
     print('Save file...')
-    os.mkdir('output_'+stamp)
+    os.mkdir(filename+'_'+stamp)
 except FileExistsError:
     print('File is exist')
     print('Save file...')
-data.to_csv('output_'+stamp+'/DATA.csv')
-diattenuation.to_csv('output_'+stamp+'/diattenuation.csv')
-retardance.to_csv('output_'+stamp+'/retardance.csv')
-depolarization.to_csv('output_'+stamp+'/depolarization.csv')
+data.to_csv(filename+'_'+stamp+'/DATA.csv')
+diattenuation.to_csv(filename+'_'+stamp+'/diattenuation.csv')
+retardance.to_csv(filename+'_'+stamp+'/retardance.csv')
+depolarization.to_csv(filename+'_'+stamp+'/depolarization.csv')
 
 print('complete decomposaiton')
