@@ -106,3 +106,5 @@ data.to_csv('output\\DATA.csv')
 diattenuation.to_csv('output\\diattenuation.csv')
 retardance.to_csv('output\\retardance.csv')
 depolarization.to_csv('output\\depolarization.csv')
+
+print('complete decomposaiton')
