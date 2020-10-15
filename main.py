@@ -1,11 +1,18 @@
 import numpy as np
 import pandas as pd
-import os
+import os 
+import sys
+import time
 from matplotlib import pyplot as plt
 from nuueomueller import Luchiman, Mueller
 
-
-database = pd.read_csv('Lu_chipman.csv',index_col='wavelength')
+filename = input('Please enter the mueller csvfile name (need to key in ".csv")= ')
+try:
+    database = pd.read_csv(filename,index_col='wavelength')
+except FileNotFoundError:
+    print('Not Found your file')
+    print('Please check your file name')
+    sys.exit()
 
 wavelength = pd.Series.tolist(database.index)
 element =  pd.Series.tolist(database.columns)
@@ -99,12 +106,21 @@ with pd.ExcelWriter('output.xlsx') as writer:
     retardance.to_excel(writer,sheet_name='retardance')
     depolarization.to_excel(writer,sheet_name='depolarization')
 '''
-
+t = time.localtime()
+stamp = str()
+for i in range():
+    stamp += str(t[i])
 #儲存Csv
-os.mkdir('output')
-data.to_csv('output\\DATA.csv')
-diattenuation.to_csv('output\\diattenuation.csv')
-retardance.to_csv('output\\retardance.csv')
-depolarization.to_csv('output\\depolarization.csv')
+try:
+    print('Create a new folder...')
+    print('Save file...')
+    os.mkdir('output_'+stamp)
+except FileExistsError:
+    print('File is exist')
+    print('Save file...')
+data.to_csv('output_'+stamp+'/DATA.csv')
+diattenuation.to_csv('output_'+stamp+'/diattenuation.csv')
+retardance.to_csv('output_'+stamp+'/retardance.csv')
+depolarization.to_csv('output_'+stamp+'/depolarization.csv')
 
 print('complete decomposaiton')
