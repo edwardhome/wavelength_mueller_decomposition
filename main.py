@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 from matplotlib import pyplot as plt
 from nuueomueller import Luchiman, Mueller
 
@@ -100,8 +101,8 @@ with pd.ExcelWriter('output.xlsx') as writer:
 '''
 
 #儲存Csv
-
-data.to_csv('DATA.csv')
-diattenuation.to_csv('diattenuation.csv')
-retardance.to_csv('retardance.csv')
-depolarization.to_csv('depolarization.csv')
+os.mkdir('output')
+data.to_csv('output\\DATA.csv')
+diattenuation.to_csv('output\\diattenuation.csv')
+retardance.to_csv('output\\retardance.csv')
+depolarization.to_csv('output\\depolarization.csv')
