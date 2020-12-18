@@ -43,15 +43,27 @@ class Luchiman(Mueller):
         self.diattenuationMatrix[0] = np.array([1,self.MuellerMatrix[0,1],self.MuellerMatrix[0,2],self.MuellerMatrix[0,3]])
         self.diattenuationMatrix[1:4,0] = np.array([self.MuellerMatrix[0,1],self.MuellerMatrix[0,2],self.MuellerMatrix[0,3]])
         self.diattenuationMatrix[1:4,1:4] = np.array(mD)
-
-        
-        
+        self.D_h = self.diattenuationMatrix[0,1]
+        self.D_45 = self.diattenuationMatrix[0,2]
+        self.D_c = self.diattenuationMatrix[0,3]
+        self.D_L = sqrt(self.D_45**2+self.D_h**2)
+        self.doubleTheta = (0.5*math.atan(abs(self.D_45)/abs(self.D_h)))*math.pi/180
         if output == 'D_value':
             return self.D_value
         elif output == 'P_value':
             return self.P_value
         elif output == 'matrix':
             return self.diattenuationMatrix
+        elif output =='D_H':
+            return self.D_h
+        elif output =='D_45':
+            return self.D_45
+        elif output =='D_C':
+            return self.D_c
+        elif output =='D_L':
+            return self.D_L
+        elif output =='doubleTheta':
+            return self.doubleTheta
         else:
             print('雙衰減係數計算輸出指令錯誤')
 

@@ -29,6 +29,11 @@ for i in range(1,5):
 
 num = len(wavelength) #總運算次數
 D_value = []
+D_H = []
+D_45 =[]
+D_C =[]
+D_L = []
+doubleTheta = []
 P_value = []
 Delta_value =[]
 R_value =[]
@@ -52,6 +57,11 @@ for i in range(num):
 
     lc = Luchiman(muellermatrix)
     D_value += [lc.diattenuation('D_value')]
+    D_H += [lc.diattenuation('D_H')]
+    D_45 += [lc.diattenuation('D_45')]
+    D_C += [lc.diattenuation('D_C')]
+    D_L += [lc.diattenuation('D_L')]
+    doubleTheta += [lc.diattenuation('doubleTheta')]
     P_value += [lc.diattenuation('P_value')]
     Delta_value += [lc.depolarization('Delta_value')]
     diattenuationMatrix += [lc.diattenuation('matrix')]
@@ -68,13 +78,12 @@ for i in range(num):
     linear_value += [lc.retardancevalue('linear')]
     opticalactivity_value += [lc.retardancevalue('opticalactivity')]
     theta_value += [lc.retardancevalue('theta')]
-
 #運算結果儲存至Excel
-all_list = [D_value,P_value,Delta_value,R_value,linear_value,opticalactivity_value,theta_value]
+all_list = [D_value,D_H,D_45,D_C,D_L,doubleTheta,P_value,Delta_value,R_value,linear_value,opticalactivity_value,theta_value]
 datat = pd.DataFrame(all_list)
 data = datat.T
 data.index = wavelength
-data.columns = ['D','P','Delta','R','linear','opticalactivity','theta']
+data.columns = ['D','DH','D45','DC','DL','doubleTheat','P','Delta','R','linear','opticalactivity','theta']
 
 diattenuation  = [diattenuationM00,diattenuationM01,diattenuationM02,diattenuationM03,
                   diattenuationM10,diattenuationM11,diattenuationM12,diattenuationM13,
